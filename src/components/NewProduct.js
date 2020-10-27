@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Redux Actions
 import {addNewProductAction} from '../actions/productActions';
 
-const NewProduct = () => {
+const NewProduct = ({history}) => {
     // state just for this component
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
@@ -28,6 +28,8 @@ const NewProduct = () => {
             name,
             price
         });
+        // redirect
+        history.push('/');
     }
 
     return ( 
