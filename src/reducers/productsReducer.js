@@ -1,5 +1,4 @@
 import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR } from '../types';
-import axiosClient from '../config/axios';
 
 // every reducer have his own state
 const initialState = {

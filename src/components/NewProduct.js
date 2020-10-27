@@ -10,6 +10,9 @@ const NewProduct = () => {
     const [price, setPrice] = useState(0);
 
     const dispatch = useDispatch();
+    // access to store state
+    const loading = useSelector(state => state.products.loading);
+    const error = useSelector(state => state.products.error);
     // this call the product action
     const addProduct = product => dispatch(addNewProductAction(product));
     // when submit
@@ -71,9 +74,9 @@ const NewProduct = () => {
                         >Add</button>
                     </form>
 
-                    {/*  cargando ? <p>Cargando...</p> : null  */}
+                    { loading ? <p>Loading...</p> : null }
                     
-                    { /* error ? <p className="alert alert-danger p2 mt-4 text-center">Hubo un error</p> : null */ }
+                    { error ? <p className="alert alert-danger p2 mt-4 text-center">An error happened</p> : null }
                 </div>
             </div>
         </div>
