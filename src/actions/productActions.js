@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR, START_PRODUCTS_DOWNLOADING, PRODUCTS_DOWNLOADING_SUCCESS, PRODUCTS_DOWNLOADING_ERROR } from '../types';
+import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR, START_PRODUCTS_DOWNLOADING, PRODUCTS_DOWNLOADING_SUCCESS, PRODUCTS_DOWNLOADING_ERROR, GET_PRODUCT_DELETE, PRODUCT_DELETED_SUCCESS, PRODUCT_DELETED_ERROR } from '../types';
 import axiosClient from '../config/axios';
 import Swal from 'sweetalert2';
 
@@ -73,5 +73,37 @@ const downloadingProductsSuccess = products => ({
 
 const downloadingProductsError = () => ({
     type: PRODUCTS_DOWNLOADING_ERROR,
+    payload: true
+})
+
+// DELETES
+
+export function deleteProductAction (id) {
+    return async(dispatch) => {
+        dispatch(getProductDelete(id));
+        // console.log(id)
+        try {
+            await axiosClient.delete(`/products/${id}`);
+            dispatch(deleteProductSuccess());
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+        } catch (error) {
+            
+        }
+    }
+} 
+
+export const getProductDelete = id => ({
+    type: GET_PRODUCT_DELETE,
+    payload: id
+})
+export const deleteProductSuccess = () => ({
+    type: PRODUCT_DELETED_SUCCESS
+})
+export const deleteProductError = () => ({
+    type: PRODUCT_DELETED_ERROR,
     payload: true
 })
