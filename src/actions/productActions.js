@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR } from '../types';
+import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR, START_PRODUCTS_DOWNLOADING, PRODUCTS_DOWNLOADING_SUCCESS, PRODUCTS_DOWNLOADING_ERROR } from '../types';
 import axiosClient from '../config/axios';
 import Swal from 'sweetalert2';
 
@@ -18,7 +18,7 @@ export const addNewProductAction = (product) => {
                 'success'
             );
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             // if error
             dispatch(addProductError(true));
             // alert
@@ -32,7 +32,8 @@ export const addNewProductAction = (product) => {
 }
 
 const addProduct = () => ({
-    type: ADD_PRODUCT
+    type: ADD_PRODUCT,
+    payload: true
 })
 
 const addProductSuccess = product => ({
@@ -43,4 +44,34 @@ const addProductSuccess = product => ({
 const addProductError = (state) => ({
     type: ADD_PRODUCT_ERROR,
     payload: state
+});
+
+// GET PRODUCTS FROM DB
+export function getProductsAction() {
+    return async (dispatch) => {
+        dispatch( downloadingProducts() );
+        
+        try {
+            const res = await axiosClient.get('/products');
+            dispatch(downloadingProductsSuccess(res.data));
+            // console.log(res.data)
+        } catch (error) {
+            dispatch(downloadingProductsError());
+        }
+    }
+}
+
+const downloadingProducts = () => ({
+    type: START_PRODUCTS_DOWNLOADING,
+    payload: true
+})
+
+const downloadingProductsSuccess = products => ({
+    type: PRODUCTS_DOWNLOADING_SUCCESS,
+    payload: products
+})
+
+const downloadingProductsError = () => ({
+    type: PRODUCTS_DOWNLOADING_ERROR,
+    payload: true
 })

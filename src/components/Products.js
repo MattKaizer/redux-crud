@@ -1,6 +1,22 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react';
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import {getProductsAction} from '../actions/productActions';
+import Product from './Product';
 
 const Products = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const loadingProducts = () => dispatch(getProductsAction());
+        loadingProducts();
+        // eslint-disable-next-line
+    }, []);
+
+    // get state
+    const products = useSelector(state => state.products.products);
+    // console.log(products);
+
     return ( 
         <Fragment>
         <h2 className="text-center my-5">Product List</h2>
@@ -18,14 +34,14 @@ const Products = () => {
                  </tr>
             </thead>
             <tbody>
-                { /* productos.length === 0 ? 'No hay productos' : (
-                    productos.map(producto => (
-                        <Producto
-                             key={producto.id}
-                             producto={producto}
+                { products.length === 0 ? 'No hay productos' : (
+                    products.map(product => (
+                        <Product
+                             key={product.id}
+                             product={product}
                         />
                     ))
-                )  */}
+                ) }
             </tbody>
         </table>
     </Fragment>
