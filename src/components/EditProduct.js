@@ -12,7 +12,7 @@ const EditProduct = () => {
     const submitNewProduct = e => {
         e.preventDefault()
 
-        editProductAction()
+        editProductAction();
     }
 
     return ( 
