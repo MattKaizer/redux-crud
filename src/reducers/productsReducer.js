@@ -1,11 +1,12 @@
-import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR, START_PRODUCTS_DOWNLOADING, PRODUCTS_DOWNLOADING_SUCCESS, PRODUCTS_DOWNLOADING_ERROR, GET_PRODUCT_DELETE, PRODUCT_DELETED_SUCCESS, PRODUCT_DELETED_ERROR } from '../types';
+import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR, START_PRODUCTS_DOWNLOADING, PRODUCTS_DOWNLOADING_SUCCESS, PRODUCTS_DOWNLOADING_ERROR, GET_PRODUCT_DELETE, PRODUCT_DELETED_SUCCESS, PRODUCT_DELETED_ERROR, GET_PRODUCT_EDIT } from '../types';
 
 // every reducer have his own state
 const initialState = {
     products: [],
     error: null,
     loading: false,
-    deleteProduct: null
+    deleteProduct: null,
+    productEdit: null
 }
 // eslint-disable-next-line
 export default (state = initialState, action) => {
@@ -47,6 +48,11 @@ export default (state = initialState, action) => {
                     ...state,
                     products: state.products.filter(product => product.id !== state.deleteProduct),
                     deleteProduct: null
+                }
+            case GET_PRODUCT_EDIT:
+                return {
+                    ...state,
+                    productEdit: action.payload
                 }
         default:
             return state;

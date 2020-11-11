@@ -1,6 +1,20 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {editProductAction} from '../actions/productActions';
 
 const EditProduct = () => {
+
+    const product = useSelector(state => state.products.productEdit);
+    // console.log(product)
+    if(!product) return null;
+    const { name, price, id } = product;
+
+    const submitNewProduct = e => {
+        e.preventDefault()
+
+        editProductAction()
+    }
+
     return ( 
         <div className="row justify-content-center">
         <div className="col-md-8">
@@ -13,7 +27,7 @@ const EditProduct = () => {
                     {/* alerta ? <p className={alerta.classes}> {alerta.msg} </p> : null  */}
 
                     <form
-                        // onSubmit={submitNuevoProducto}
+                        onSubmit={submitNewProduct}
                     >
                         <div className="form-group">
                             <label>Product Name</label>
@@ -22,7 +36,7 @@ const EditProduct = () => {
                                 className="form-control"
                                 placeholder="Product Name"
                                 name="name"
-                                // value={name}
+                                value={name}
                                 // onChange={e => guardarNombre(e.target.value)}
                             />
                         </div>
@@ -34,7 +48,7 @@ const EditProduct = () => {
                                 className="form-control"
                                 placeholder="Product Price"
                                 name="price"
-                                // value={price}
+                                value={price}
                                 // onChange={e =>  guardarPrecio( Number(e.target.value) )}
                             />
                         </div>
