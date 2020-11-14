@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR, START_PRODUCTS_DOWNLOADING, PRODUCTS_DOWNLOADING_SUCCESS, PRODUCTS_DOWNLOADING_ERROR, GET_PRODUCT_DELETE, PRODUCT_DELETED_SUCCESS, PRODUCT_DELETED_ERROR, GET_PRODUCT_EDIT, START_PRODUCT_EDIT } from '../types';
+import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR, START_PRODUCTS_DOWNLOADING, PRODUCTS_DOWNLOADING_SUCCESS, PRODUCTS_DOWNLOADING_ERROR, GET_PRODUCT_DELETE, PRODUCT_DELETED_SUCCESS, PRODUCT_DELETED_ERROR, GET_PRODUCT_EDIT, START_PRODUCT_EDIT, PRODUCT_EDIT_SUCCESS } from '../types';
 import axiosClient from '../config/axios';
 import Swal from 'sweetalert2';
 
@@ -122,19 +122,23 @@ const getProductEditAction = product => ({
 
 export function editProductAction(product) {
     return async (dispatch) => {
-        dispatch( startProductEditAction(product) );
+        dispatch( startProductEdit() );
 
         try {
-            const res = await axiosClient.put(`/products/${product.id}`, product);
-            console.log(res)
+            await axiosClient.put(`/products/${product.id}`, product);
+            // console.log(res)
+            dispatch(editProductSuccess(product));
         } catch (error) {
-            
+            console.log(error)
         }
     }
 }
 
-const startProductEditAction = product => ({
+const startProductEdit = () => ({
     type: START_PRODUCT_EDIT,
+});
+const editProductSuccess = product => ({
+    type: PRODUCT_EDIT_SUCCESS,
     payload: product
-})
+});
 

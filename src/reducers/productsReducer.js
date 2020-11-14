@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR, START_PRODUCTS_DOWNLOADING, PRODUCTS_DOWNLOADING_SUCCESS, PRODUCTS_DOWNLOADING_ERROR, GET_PRODUCT_DELETE, PRODUCT_DELETED_SUCCESS, PRODUCT_DELETED_ERROR, GET_PRODUCT_EDIT } from '../types';
+import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR, START_PRODUCTS_DOWNLOADING, PRODUCTS_DOWNLOADING_SUCCESS, PRODUCTS_DOWNLOADING_ERROR, GET_PRODUCT_DELETE, PRODUCT_DELETED_SUCCESS, PRODUCT_DELETED_ERROR, GET_PRODUCT_EDIT, PRODUCT_EDIT_SUCCESS } from '../types';
 
 // every reducer have his own state
 const initialState = {
@@ -53,6 +53,14 @@ export default (state = initialState, action) => {
                 return {
                     ...state,
                     productEdit: action.payload
+                }
+            case PRODUCT_EDIT_SUCCESS:
+                return {
+                    ...state,
+                    productEdit: null,
+                    products: state.products.map(product => 
+                        product.id === action.payload.id ? product = action.payload : product
+                    )
                 }
         default:
             return state;

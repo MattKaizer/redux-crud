@@ -2,12 +2,12 @@
   "products": [
     {
       "name": "Rib Eye 800g",
-      "price": "200",
+      "price": 200,
       "id": 4
     },
     {
       "name": "Jugo de Fresa",
-      "price": "200",
+      "price": 200,
       "id": 5
     },
     {
@@ -19,6 +19,11 @@
       "name": "carne",
       "price": 20,
       "id": 19
+    },
+    {
+      "name": "pepe",
+      "price": "10566",
+      "id": 20
     }
   ]
 }

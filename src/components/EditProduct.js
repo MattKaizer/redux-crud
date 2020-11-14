@@ -1,18 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {editProductAction} from '../actions/productActions';
+import { useHistory } from 'react-router-dom';
+
 
 const EditProduct = () => {
-
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const [productState, setProductState] = useState({
+        name: '',
+        price: 0
+    });
     const product = useSelector(state => state.products.productEdit);
+
+    useEffect(() => {
+        setProductState(product);
+    }, [product]);
+
+    // read data
+    const onChangeForm = e => {
+        setProductState({
+            ...productState,
+            [e.target.name] : e.target.value
+        })
+    }
+
     // console.log(product)
-    if(!product) return null;
-    const { name, price, id } = product;
+    // if(!product) return null;
+
+    const { name, price, id } = productState;
 
     const submitNewProduct = e => {
         e.preventDefault()
-
-        editProductAction();
+        dispatch(editProductAction(productState));
+        history.push('/');
     }
 
     return ( 
@@ -37,7 +58,7 @@ const EditProduct = () => {
                                 placeholder="Product Name"
                                 name="name"
                                 value={name}
-                                // onChange={e => guardarNombre(e.target.value)}
+                                onChange={onChangeForm}
                             />
                         </div>
 
@@ -49,7 +70,7 @@ const EditProduct = () => {
                                 placeholder="Product Price"
                                 name="price"
                                 value={price}
-                                // onChange={e =>  guardarPrecio( Number(e.target.value) )}
+                                onChange={onChangeForm}
                             />
                         </div>
 
