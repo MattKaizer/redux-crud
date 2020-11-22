@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR, START_PRODUCTS_DOWNLOADING, PRODUCTS_DOWNLOADING_SUCCESS, PRODUCTS_DOWNLOADING_ERROR, GET_PRODUCT_DELETE, PRODUCT_DELETED_SUCCESS, PRODUCT_DELETED_ERROR, GET_PRODUCT_EDIT, START_PRODUCT_EDIT, PRODUCT_EDIT_SUCCESS } from '../types';
+import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS, ADD_PRODUCT_ERROR, START_PRODUCTS_DOWNLOADING, PRODUCTS_DOWNLOADING_SUCCESS, PRODUCTS_DOWNLOADING_ERROR, GET_PRODUCT_DELETE, PRODUCT_DELETED_SUCCESS, PRODUCT_DELETED_ERROR, GET_PRODUCT_EDIT, START_PRODUCT_EDIT, PRODUCT_EDIT_SUCCESS, PRODUCT_EDIT_ERROR } from '../types';
 import axiosClient from '../config/axios';
 import Swal from 'sweetalert2';
 
@@ -129,7 +129,8 @@ export function editProductAction(product) {
             // console.log(res)
             dispatch(editProductSuccess(product));
         } catch (error) {
-            console.log(error)
+            // console.log(error);
+            dispatch(editProductError())
         }
     }
 }
@@ -140,5 +141,9 @@ const startProductEdit = () => ({
 const editProductSuccess = product => ({
     type: PRODUCT_EDIT_SUCCESS,
     payload: product
+});
+const editProductError = () => ({
+    type: PRODUCT_EDIT_ERROR,
+    payload: true
 });
 
