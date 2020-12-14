@@ -1,4 +1,4 @@
-
+import { SHOW_ALERT, HIDE_ALERT } from '../types';
 
 // EVERY REDUCER HAVE HIS OWN STAGE
 const initialState = {
