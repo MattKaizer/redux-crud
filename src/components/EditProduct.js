@@ -28,7 +28,7 @@ const EditProduct = () => {
     // console.log(product)
     // if(!product) return null;
 
-    const { name, price, id } = productState;
+    const { name, price } = productState;
 
     const submitNewProduct = e => {
         e.preventDefault()
