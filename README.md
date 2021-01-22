@@ -1,3 +1,38 @@
+# REACT practice - TODO App
+
+## Task Description
+
+CRUD sencillo de elementos producto.para para la práctica de la implementación de redux en lugar de contexAPI en react. Para no depender del back, utilice un fake serser (json-server).
+
+## Criteria
+
+* practica de react.
+* entender el funcionamiento de REDUX.
+* Implentación de REDUX y comparación con Context API.
+
+#### Enum Tech used
+
+* HTML5
+* CSS3
+* JS
+* Axios
+* ReacJS 
+    * React Hooks
+    * REDUX
+* JSON-SERVER
+
+#### Instructions
+~~~
+npm i -g json-server
+git clone https://github.com/MattKaizer/redux-crud.git
+cd redux-crud/
+npm i
+json-server db.json --port 4000
+npm run start
+~~~
+
+<hr>
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
