@@ -1,4 +1,4 @@
-# REACT practice - TODO App
+# REACT practice - REDUX
 
 ## Task Description
 
